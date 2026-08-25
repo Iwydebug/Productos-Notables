@@ -85,6 +85,28 @@
         .btn-formula-visual:hover, .btn-formula-visual:focus { background: linear-gradient(135deg, var(--fucsia), var(--azul-electrico)); border-color: var(--amarillo); transform: translateY(-3px); box-shadow: 0 8px 22px rgba(6, 182, 212, 0.35); outline: none; }
 
         /* ============================================
+           BOTON DE VISUALIZACION
+           ============================================ */
+        .btn-formula-visual { display: block; width: 100%; margin-top: 1.25rem; padding: 0.85rem 1.2rem; border: 2px solid var(--cian); border-radius: 10px; background: linear-gradient(135deg, var(--azul-electrico), var(--morado)); color: white; text-align: center; text-decoration: none; font-weight: 700; transition: var(--transicion); }
+        .btn-formula-visual:hover, .btn-formula-visual:focus { background: linear-gradient(135deg, var(--fucsia), var(--azul-electrico)); border-color: var(--amarillo); transform: translateY(-3px); box-shadow: 0 8px 22px rgba(6, 182, 212, 0.35); outline: none; }
+
+        /* ============================================
+           MODAL DE VISUALIZACION EMERGENTE
+           ============================================ */
+        .visualizacion-modal { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(15, 23, 42, 0.78); }
+        .visualizacion-modal:target { display: flex; }
+        .visualizacion-contenido { position: relative; width: min(92vw, 900px); max-height: 90vh; overflow: auto; padding: 22px; border-radius: 18px; background: var(--fondo-medio); border: 3px solid var(--morado-claro); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35); animation: aparecerVisualizacion 0.2s ease-out; }
+        .visualizacion-contenido svg { display: block; width: 100%; height: auto; max-height: 72vh; margin: 0 auto; }
+        .cerrar-visualizacion { position: absolute; top: 8px; right: 12px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; background: var(--rojo); color: white; font-size: 24px; line-height: 34px; text-align: center; text-decoration: none; font-weight: 700; }
+        .cerrar-visualizacion:hover { background: #dc2626; }
+        @keyframes aparecerVisualizacion { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+        .visualizacion-titulo { text-align: center; color: var(--amarillo); font-size: 1.8rem; margin-bottom: 1rem; }
+        .visualizacion-descripcion { text-align: center; margin-top: 1rem; color: var(--texto-medio); }
+        .legend { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+        .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+        .legend-color { width: 20px; height: 20px; border-radius: 4px; }
+        
+        /* ============================================
            LABORATORIO DE FÓRMULAS
            ============================================ */
         .lab-container { background: var(--fondo-medio); border-radius: 20px; padding: 2rem; margin: 2rem 0; border: 3px solid var(--cian); }
@@ -98,6 +120,8 @@
         .lab-equality { font-size: 1.5rem; margin: 1rem 0; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px; border: 2px solid var(--verde); }
         .lab-equality.verificada { background: rgba(16, 185, 129, 0.2); border-color: var(--verde); }
         .lab-equality.error { background: rgba(239, 68, 68, 0.2); border-color: var(--rojo); }
+        .btn-visual { background: var(--azul-electrico); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: bold; transition: var(--transicion); }
+        .btn-visual:hover { background: var(--morado); transform: scale(1.05); }
 
         /* ============================================
            VISUALIZACIONES GEOMÉTRICAS
@@ -106,8 +130,7 @@
         .visual-card { background: var(--fondo-medio); border-radius: 20px; padding: 2rem; border: 3px solid var(--morado-claro); }
         .visual-canvas { background: var(--fondo-oscuro); border-radius: 15px; margin: 1rem 0; display: flex; justify-content: center; align-items: center; min-height: 300px; position: relative; overflow: hidden; }
         .visual-controls { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
-        .btn-visual { background: var(--azul-electrico); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: bold; transition: var(--transicion); }
-        .btn-visual:hover { background: var(--morado); transform: scale(1.05); }
+       
         .legend { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
         .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
         .legend-color { width: 20px; height: 20px; border-radius: 4px; }
@@ -171,7 +194,6 @@
                 <a href="#que-son">¿Qué son?</a>
                 <a href="#formulas">Fórmulas</a>
                 <a href="#como-usar">Cómo usar</a>
-                <a href="#visualiza">Visualiza</a>
                 <a href="#mision">Misión</a>
                 <a href="#resumen">Resumen</a>
             </div>
