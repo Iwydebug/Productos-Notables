@@ -234,10 +234,22 @@
         <h2 class="section-title">Fórmulas de productos notables</h2>
         <p class="section-subtitle">Conoce los 8 poderes algebraicos esenciales. Cada uno tiene su propia personalidad y reglas.</p>
         <div class="formulas-grid">
-            <!-- 1. Cuadrado de una suma -->
+           <!-- 1. Producto de suma por diferencia -->
+            <div class="formula-card" data-formula="suma-diferencia">
+                <svg class="formula-icon" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="45" fill="var(--cian)"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="35" font-weight="bold">×±</text></svg>
+                <h3 class="formula-name">1. Suma y producto de términos iguales</h3>
+                <div class="formula-math">(A + B)(A - B) = A&#178; - B&#178;</div>
+                <div class="formula-rule"><strong>Regla verbal:</strong> "El cuadrado del primero, menos el cuadrado del segundo."</div>
+                <div class="formula-example"><strong>Ejemplo:</strong> (x + 5)(x - 5) = x&#178; - 5&#178; = x&#178; - 25</div>
+                <div class="alerta-villano"><span>⚠️</span><span><strong>Alerta de villano:</strong> ¡No hay término del medio! Los términos cruzados se cancelan.</span></div>
+                <div class="consejo-heroe">💡 <strong>Consejo del Veloz Factor:</strong> "Es la diferencia de cuadrados. ¡Rápido y directo!"</div>
+                <a class="btn-formula-visual" href="#canvas-diferencia-cuadrados">🔎 Ver visualización de esta fórmula</a>
+            </div>
+            
+            <!-- 2. Cuadrado de una suma -->
             <div class="formula-card" data-formula="suma">
                 <svg class="formula-icon" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="45" fill="var(--azul-electrico)"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="40" font-weight="bold">+</text></svg>
-                <h3 class="formula-name">1. Cuadrado de una Suma</h3>
+                <h3 class="formula-name">2. Cuadrado de una suma</h3>
                 <div class="formula-math">(A + B)&#178; = A&#178; + 2AB + B&#178;</div>
                 <div class="formula-rule"><strong>Regla verbal:</strong> "El cuadrado del primero, más dos veces el primero por el segundo, más el cuadrado del segundo."</div>
                 <div class="formula-example"><strong>Ejemplo:</strong> (3a + 5)&#178; = (3a)&#178; + 2(3a)(5) + 5&#178; = 9a&#178; + 30a + 25</div>
@@ -246,11 +258,11 @@
                 <a class="btn-formula-visual" href="#canvas-suma-cuadrado">🔎 Ver visualización de esta fórmula</a>
             </div>
 
-            <!-- 2. Cuadrado de una diferencia -->
+            <!-- 3. Cuadrado de una diferencia -->
             <div class="formula-card" data-formula="diferencia">
                 <svg class="formula-icon" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="45" fill="var(--morado)"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="40" font-weight="bold">−</text></svg>
-                <h3 class="formula-name">2. Cuadrado de una Diferencia</h3>
-                <div class="formula-math">(a - b)&#178; = a&#178; - 2ab + b&#178;</div>
+                <h3 class="formula-name">3. Cuadrado de una diferencia</h3>
+                <div class="formula-math">(A - B)&#178; = A&#178; - 2AB + B&#178;</div>
                 <div class="formula-rule"><strong>Regla verbal:</strong> "El cuadrado del primero, menos dos veces el primero por el segundo, más el cuadrado del segundo."</div>
                 <div class="formula-example"><strong>Ejemplo:</strong> (x - 4)&#178; = x&#178; - 2(x)(4) + 4&#178; = x&#178; - 8x + 16</div>
                 <div class="alerta-villano"><span>⚠️</span><span><strong>Alerta de villano:</strong> ¡El último término es +b&#178;, no -b&#178;! El cuadrado siempre es positivo.</span></div>
@@ -258,35 +270,11 @@
                 <a class="btn-formula-visual" href="#canvas-diferencia-cuadrado">🔎 Ver visualización de esta fórmula</a>
             </div>
 
-            <!-- 3. Producto de suma por diferencia -->
-            <div class="formula-card" data-formula="suma-diferencia">
-                <svg class="formula-icon" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="45" fill="var(--cian)"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="35" font-weight="bold">×±</text></svg>
-                <h3 class="formula-name">3. Suma por Diferencia</h3>
-                <div class="formula-math">(a + b)(a - b) = a&#178; - b&#178;</div>
-                <div class="formula-rule"><strong>Regla verbal:</strong> "El cuadrado del primero, menos el cuadrado del segundo."</div>
-                <div class="formula-example"><strong>Ejemplo:</strong> (x + 5)(x - 5) = x&#178; - 5&#178; = x&#178; - 25</div>
-                <div class="alerta-villano"><span>⚠️</span><span><strong>Alerta de villano:</strong> ¡No hay término del medio! Los términos cruzados se cancelan.</span></div>
-                <div class="consejo-heroe">💡 <strong>Consejo del Veloz Factor:</strong> "Es la diferencia de cuadrados. ¡Rápido y directo!"</div>
-                <a class="btn-formula-visual" href="#canvas-diferencia-cuadrados">🔎 Ver visualización de esta fórmula</a>
-            </div>
-
-            <!-- 4. Producto de binomios con término común -->
-            <div class="formula-card" data-formula="comun">
-                <svg class="formula-icon" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="45" fill="var(--amarillo-intenso)"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="40" font-weight="bold">x</text></svg>
-                <h3 class="formula-name">4. Binomios con Término Común</h3>
-                <div class="formula-math">(x + a)(x + b) = x&#178; + (a + b)x + ab</div>
-                <div class="formula-rule"><strong>Regla verbal:</strong> "Cuadrado del común, más la suma de los no comunes por el común, más el producto de los no comunes."</div>
-                <div class="formula-example"><strong>Ejemplo:</strong> (x + 2)(x + 3) = x&#178; + (2+3)x + (2)(3) = x&#178; + 5x + 6</div>
-                <div class="alerta-villano"><span>⚠️</span><span><strong>Alerta de villano:</strong> ¡No confundas la suma (a+b) con el producto ab! Son dos cosas diferentes.</span></div>
-                <div class="consejo-heroe">💡 <strong>Consejo del Profe Común:</strong> "El término que se repite es el rey. Los otros dos son sus aliados."</div>
-                <a class="btn-formula-visual" href="#visualiza">🔎 Ver visualización de esta fórmula</a>
-            </div>
-
-            <!-- 5. Cubo de una suma -->
+            <!-- 4. Cubo de una suma -->
             <div class="formula-card" data-formula="cubo-suma">
                 <svg class="formula-icon" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="45" fill="var(--fucsia)"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="40" font-weight="bold">3+</text></svg>
-                <h3 class="formula-name">5. Cubo de una Suma</h3>
-                <div class="formula-math">(a + b)&#179; = a&#179; + 3a&#178;b + 3ab&#178; + b&#179;</div>
+                <h3 class="formula-name">4. Cubo de una suma</h3>
+                <div class="formula-math">(A + B)&#179; = A&#179; + 3A&#178;B + 3AB&#178; + B&#179;</div>
                 <div class="formula-rule"><strong>Regla verbal:</strong> "Cubo del primero, más tres veces el cuadrado del primero por el segundo, más tres veces el primero por el cuadrado del segundo, más el cubo del segundo."</div>
                 <div class="formula-example"><strong>Ejemplo:</strong> (x + 2)&#179; = x&#179; + 3(x&#178;)(2) + 3(x)(2&#178;) + 2&#179; = x&#179; + 6x&#178; + 12x + 8</div>
                 <div class="alerta-villano"><span>⚠️</span><span><strong>Alerta de villano:</strong> ¡Son 4 términos, no 2! Los coeficientes son 1, 3, 3, 1.</span></div>
@@ -294,40 +282,16 @@
                 <a class="btn-formula-visual" href="#canvas3d">🔎 Ver visualización de esta fórmula</a>
             </div>
 
-            <!-- 6. Cubo de una diferencia -->
+            <!-- 5. Cubo de una diferencia -->
             <div class="formula-card" data-formula="cubo-diferencia">
                 <svg class="formula-icon" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="45" fill="var(--naranja)"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="40" font-weight="bold">3−</text></svg>
-                <h3 class="formula-name">6. Cubo de una Diferencia</h3>
-                <div class="formula-math">(a - b)&#179; = a&#179; - 3a&#178;b + 3ab&#178; - b&#179;</div>
+                <h3 class="formula-name">5. Cubo de una diferencia</h3>
+                <div class="formula-math">(A - B)&#179; = A&#179; - 3A&#178;B + 3AB&#178; - B&#179;</div>
                 <div class="formula-rule"><strong>Regla verbal:</strong> "Cubo del primero, menos tres veces el cuadrado del primero por el segundo, más tres veces el primero por el cuadrado del segundo, menos el cubo del segundo."</div>
                 <div class="formula-example"><strong>Ejemplo:</strong> (x - 3)&#179; = x&#179; - 3(x&#178;)(3) + 3(x)(3&#178;) - 3&#179; = x&#179; - 9x&#178; + 27x - 27</div>
                 <div class="alerta-villano"><span>⚠️</span><span><strong>Alerta de villano:</strong> ¡Los signos alternan: +, −, +, −! No todos son negativos.</span></div>
                 <div class="consejo-heroe">💡 <strong>Consejo de la Reina Cúbica:</strong> "Es igual que la suma, pero los signos van alternados."</div>
                 <a class="btn-formula-visual" href="#canvas3d">🔎 Ver visualización de esta fórmula</a>
-            </div>
-
-            <!-- 7. Suma de cubos -->
-            <div class="formula-card" data-formula="suma-cubos">
-                <svg class="formula-icon" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="45" fill="var(--verde)"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="35" font-weight="bold">+3</text></svg>
-                <h3 class="formula-name">7. Suma de Cubos</h3>
-                <div class="formula-math">a&#179; + b&#179; = (a + b)(a&#178; - ab + b&#178;)</div>
-                <div class="formula-rule"><strong>Regla verbal:</strong> "La suma de cubos se factoriza como: suma de las bases, por cuadrado del primero menos el producto más cuadrado del segundo."</div>
-                <div class="formula-example"><strong>Ejemplo:</strong> x&#179; + 8 = x&#179; + 2&#179; = (x + 2)(x&#178; - 2x + 4)</div>
-                <div class="alerta-villano"><span>⚠️</span><span><strong>Alerta de villano:</strong> ¡El trinomio tiene signos: +, −, +! No todos son positivos.</span></div>
-                <div class="consejo-heroe">💡 <strong>Consejo del Factorizador:</strong> "El binomio mantiene el signo original. El trinomio lo alterna."</div>
-                <a class="btn-formula-visual" href="#visualiza">🔎 Ver visualización de esta fórmula</a>
-            </div>
-
-            <!-- 8. Diferencia de cubos -->
-            <div class="formula-card" data-formula="diferencia-cubos">
-                <svg class="formula-icon" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="45" fill="var(--rojo)"/><text x="50" y="60" text-anchor="middle" fill="white" font-size="35" font-weight="bold">−3</text></svg>
-                <h3 class="formula-name">8. Diferencia de Cubos</h3>
-                <div class="formula-math">a&#179; - b&#179; = (a - b)(a&#178; + ab + b&#178;)</div>
-                <div class="formula-rule"><strong>Regla verbal:</strong> "La diferencia de cubos se factoriza como: diferencia de las bases, por cuadrado del primero más el producto más cuadrado del segundo."</div>
-                <div class="formula-example"><strong>Ejemplo:</strong> x&#179; - 27 = x&#179; - 3&#179; = (x - 3)(x&#178; + 3x + 9)</div>
-                <div class="alerta-villano"><span>⚠️</span><span><strong>Alerta de villano:</strong> ¡El trinomio tiene todos los signos positivos! Es diferente a la suma de cubos.</span></div>
-                <div class="consejo-heroe">💡 <strong>Consejo del Maestro Factor:</strong> "Binomio con el signo original, trinomio todo positivo."</div>
-                <a class="btn-formula-visual" href="#visualiza">🔎 Ver visualización de esta fórmula</a>
             </div>
         </div>
     </section>
@@ -356,45 +320,250 @@
         </div>
     </section>
 
-    <!-- SECCION VISUALIZA -->
-    <section id="visualiza">
-        <h2 class="section-title">Visualizaciones geométricas</h2>
-        <p class="section-subtitle">Comprende el significado geométrico de cada producto notable. ¡Las matemáticas se ven mejor cuando las puedes ver!</p>
-        <div class="visual-container">
-            <!-- VISUALIZACION 1: CUADRADO DE UNA SUMA -->
-            <div class="visual-card" id="visual-suma-cuadrado">
-                <h3 style="color: var(--amarillo); text-align: center;">(a + b)&#178;</h3>
-                <div class="visual-canvas" id="canvas-suma-cuadrado"><svg width="280" height="280" viewBox="0 0 280 280"><rect x="20" y="20" width="240" height="240" fill="none" stroke="var(--texto-medio)" stroke-width="2"/><rect x="20" y="20" width="160" height="160" fill="rgba(0, 102, 255, 0.7)" stroke="var(--azul-electrico)" stroke-width="2"/><text x="100" y="105" text-anchor="middle" fill="white" font-size="20" font-weight="bold">a&#178;</text><rect x="180" y="20" width="80" height="160" fill="rgba(251, 191, 36, 0.7)" stroke="var(--amarillo)" stroke-width="2"/><text x="220" y="105" text-anchor="middle" fill="white" font-size="16" font-weight="bold">ab</text><rect x="20" y="180" width="160" height="80" fill="rgba(251, 191, 36, 0.7)" stroke="var(--amarillo)" stroke-width="2"/><text x="100" y="225" text-anchor="middle" fill="white" font-size="16" font-weight="bold">ab</text><rect x="180" y="180" width="80" height="80" fill="rgba(236, 72, 153, 0.7)" stroke="var(--fucsia)" stroke-width="2"/><text x="220" y="225" text-anchor="middle" fill="white" font-size="16" font-weight="bold">b&#178;</text><text x="100" y="15" text-anchor="middle" fill="var(--azul-electrico)" font-size="14">a</text><text x="220" y="15" text-anchor="middle" fill="var(--amarillo)" font-size="14">b</text><text x="10" y="100" text-anchor="middle" fill="var(--azul-electrico)" font-size="14" transform="rotate(-90, 10, 100)">a</text><text x="10" y="220" text-anchor="middle" fill="var(--fucsia)" font-size="14" transform="rotate(-90, 10, 220)">b</text></svg></div>
-                <div class="legend"><div class="legend-item"><div class="legend-color" style="background: rgba(0, 102, 255, 0.7);"></div><span>a&#178;</span></div><div class="legend-item"><div class="legend-color" style="background: rgba(251, 191, 36, 0.7);"></div><span>ab + ab = 2ab</span></div><div class="legend-item"><div class="legend-color" style="background: rgba(236, 72, 153, 0.7);"></div><span>b&#178;</span></div></div>
-                <p style="text-align: center; margin-top: 1rem; color: var(--texto-medio);">Un cuadrado de lado (a+b) se divide en cuatro regiones: a&#178;, dos rectángulos ab, y b&#178;.</p>
+    <!-- MODELES DE VISUALIZACIÃON -->
+    
+     <!-- Modal 1: Producto de suma por diferencia -->
+    <div id="canvas-suma-diferencia" class="visualizacion-modal">
+        <div class="visualizacion-contenido">
+            <a class="cerrar-visualizacion" href="#formulas" aria-label="Cerrar visualizaciÃ³n">X</a>
+            <h3 class="visualizacion-titulo">Producto de suma por diferencia</h3>
+            <svg width="280" height="280" viewBox="0 0 280 280">
+                <rect x="20" y="20" width="240" height="240" fill="rgba(0, 102, 255, 0.3)" stroke="var(--azul-electrico)" stroke-width="2"/>
+                <text x="140" y="140" text-anchor="middle" fill="var(--azul-electrico)" font-size="24" font-weight="bold">a²</text>
+                <rect x="180" y="180" width="80" height="80" fill="rgba(239, 68, 68, 0.7)" stroke="var(--rojo)" stroke-width="3"/>
+                <text x="220" y="225" text-anchor="middle" fill="white" font-size="18" font-weight="bold">b²</text>
+                <path d="M 100 140 L 180 140" stroke="var(--amarillo)" stroke-width="3" fill="none" marker-end="url(#flecha)"/>
+                <text x="140" y="130" text-anchor="middle" fill="var(--amarillo)" font-size="12">reorganizar</text>
+                <defs>
+                    <marker id="flecha" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto">
+                        <path d="M0,0 L0,6 L9,3 z" fill="var(--amarillo)"/>
+                    </marker>
+                </defs>
+            </svg>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(0, 102, 255, 0.3)"></div>
+                    <span>a²</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(239, 68, 68, 0.7)"></div>
+                    <span>b²</span>
+                </div>
             </div>
-
-            <!-- VISUALIZACION 2: CUADRADO DE UNA DIFERENCIA -->
-            <div class="visual-card" id="visual-diferencia-cuadrado">
-                <h3 style="color: var(--amarillo); text-align: center;">(a - b)&#178;</h3>
-                <div class="visual-canvas" id="canvas-diferencia-cuadrado"><svg width="280" height="280" viewBox="0 0 280 280"><rect x="20" y="20" width="240" height="240" fill="rgba(0, 102, 255, 0.3)" stroke="var(--azul-electrico)" stroke-width="2"/><text x="140" y="140" text-anchor="middle" fill="var(--azul-electrico)" font-size="24" font-weight="bold">a&#178;</text><rect x="20" y="20" width="160" height="160" fill="rgba(16, 185, 129, 0.7)" stroke="var(--verde)" stroke-width="3"/><text x="100" y="105" text-anchor="middle" fill="white" font-size="18" font-weight="bold">(a-b)&#178;</text><rect x="180" y="20" width="80" height="160" fill="rgba(239, 68, 68, 0.5)" stroke="var(--rojo)" stroke-width="2" stroke-dasharray="5,5"/><text x="220" y="105" text-anchor="middle" fill="white" font-size="14">ab</text><rect x="20" y="180" width="160" height="80" fill="rgba(239, 68, 68, 0.5)" stroke="var(--rojo)" stroke-width="2" stroke-dasharray="5,5"/><text x="100" y="225" text-anchor="middle" fill="white" font-size="14">ab</text><rect x="180" y="180" width="80" height="80" fill="rgba(251, 191, 36, 0.7)" stroke="var(--amarillo)" stroke-width="2"/><text x="220" y="225" text-anchor="middle" fill="white" font-size="14">+b&#178;</text></svg></div>
-                <div class="legend"><div class="legend-item"><div class="legend-color" style="background: rgba(16, 185, 129, 0.7);"></div><span>(a-b)&#178;</span></div><div class="legend-item"><div class="legend-color" style="background: rgba(239, 68, 68, 0.5);"></div><span>Se resta 2ab</span></div><div class="legend-item"><div class="legend-color" style="background: rgba(251, 191, 36, 0.7);"></div><span>Se suma b&#178;</span></div></div>
-                <p style="text-align: center; margin-top: 1rem; color: var(--texto-medio);">De un cuadrado de lado a, restamos dos rectángulos ab y sumamos b&#178; porque se restó dos veces.</p>
-            </div>
-
-            <!-- VISUALIZACION 3: SUMA POR DIFERENCIA -->
-            <div class="visual-card" id="visual-diferencia-cuadrados">
-                <h3 style="color: var(--amarillo); text-align: center;">(a + b)(a - b)</h3>
-                <div class="visual-canvas" id="canvas-diferencia-cuadrados"><svg width="280" height="280" viewBox="0 0 280 280"><rect x="20" y="20" width="240" height="240" fill="rgba(0, 102, 255, 0.3)" stroke="var(--azul-electrico)" stroke-width="2"/><text x="140" y="140" text-anchor="middle" fill="var(--azul-electrico)" font-size="24" font-weight="bold">a&#178;</text><rect x="180" y="180" width="80" height="80" fill="rgba(239, 68, 68, 0.7)" stroke="var(--rojo)" stroke-width="3"/><text x="220" y="225" text-anchor="middle" fill="white" font-size="18" font-weight="bold">b&#178;</text><path d="M 100 140 L 180 140" stroke="var(--amarillo)" stroke-width="3" fill="none" marker-end="url(#flecha)"/><text x="140" y="130" text-anchor="middle" fill="var(--amarillo)" font-size="12">reorganizar</text><defs><marker id="flecha" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="var(--amarillo)"/></marker></defs></svg></div>
-                <div class="legend"><div class="legend-item"><div class="legend-color" style="background: rgba(0, 102, 255, 0.3);"></div><span>a&#178;</span></div><div class="legend-item"><div class="legend-color" style="background: rgba(239, 68, 68, 0.7);"></div><span>−b&#178;</span></div></div>
-                <p style="text-align: center; margin-top: 1rem; color: var(--texto-medio);">Un cuadrado grande menos un cuadrado pequeño. El área resultante es a&#178; − b&#178;.</p>
-            </div>
-
-            <!-- VISUALIZACION 4: CUBO 3D -->
-            <div class="visual-card" id="visual-cubo">
-                <h3 style="color: var(--amarillo); text-align: center;">Cubo de suma y diferencia - Modelo 3D</h3>
-                <div class="visual-canvas" style="min-height: 350px;"><canvas id="canvas3d" width="400" height="300" aria-label="Modelo tridimensional interactivo de un cubo"></canvas></div>
-                <div class="visual-controls"><button class="btn-visual" onclick="animarCubo()">Animar</button><button class="btn-visual" onclick="pausarCubo()">Pausar</button><button class="btn-visual" onclick="reiniciarCubo()">Reiniciar</button></div>
-                <div class="legend"><div class="legend-item"><div class="legend-color" style="background: rgba(0, 102, 255, 0.8);"></div><span>a&#179;</span></div><div class="legend-item"><div class="legend-color" style="background: rgba(251, 191, 36, 0.8);"></div><span>3a&#178;b</span></div><div class="legend-item"><div class="legend-color" style="background: rgba(236, 72, 153, 0.8);"></div><span>3ab&#178;</span></div><div class="legend-item"><div class="legend-color" style="background: rgba(107, 33, 168, 0.8);"></div><span>b&#179;</span></div></div>
-                <p style="text-align: center; margin-top: 1rem; color: var(--texto-medio);">Arrastra para rotar el cubo. Un cubo de lado (a+b) contiene 8 bloques: 1 de a&#179;, 3 de a&#178;b, 3 de ab&#178;, y 1 de b&#179;.</p>
-            </div>
+            <p class="visualizacion-descripcion">Un cuadrado grande menos un cuadrado pequeño.</p>
         </div>
-    </section>
+    </div> 
+    
+    <!-- Modal 2: Cuadrado de una suma -->
+    <div id="canvas-suma" class="visualizacion-modal">
+        <div class="visualizacion-contenido">
+            <a class="cerrar-visualizacion" href="#formulas" aria-label="Cerrar visualizaciÃ³n">X</a>
+            <h3 class="visualizacion-titulo">Cuadrado de una Suma</h3>
+            <svg width="280" height="280" viewBox="0 0 280 280">
+                <rect x="20" y="20" width="240" height="240" fill="none" stroke="var(--texto-medio)" stroke-width="2"/>
+                <rect x="20" y="20" width="160" height="160" fill="rgba(0, 102, 255, 0.7)" stroke="var(--azul-electrico)" stroke-width="2"/>
+                <text x="100" y="105" text-anchor="middle" fill="white" font-size="20" font-weight="bold">a²</text>
+                <rect x="180" y="20" width="80" height="160" fill="rgba(251, 191, 36, 0.7)" stroke="var(--amarillo)" stroke-width="2"/>
+                <text x="220" y="105" text-anchor="middle" fill="white" font-size="16" font-weight="bold">ab</text>
+                <rect x="20" y="180" width="160" height="80" fill="rgba(251, 191, 36, 0.7)" stroke="var(--amarillo)" stroke-width="2"/>
+                <text x="100" y="225" text-anchor="middle" fill="white" font-size="16" font-weight="bold">ab</text>
+                <rect x="180" y="180" width="80" height="80" fill="rgba(236, 72, 153, 0.7)" stroke="var(--fucsia)" stroke-width="2"/>
+                <text x="220" y="225" text-anchor="middle" fill="white" font-size="16" font-weight="bold">b²</text>
+                <text x="100" y="15" text-anchor="middle" fill="var(--azul-electrico)" font-size="14">a</text>
+                <text x="220" y="15" text-anchor="middle" fill="var(--amarillo)" font-size="14">b</text>
+                <text x="10" y="100" text-anchor="middle" fill="var(--azul-electrico)" font-size="14" transform="rotate(-90, 10, 100)">a</text>
+                <text x="10" y="220" text-anchor="middle" fill="var(--fucsia)" font-size="14" transform="rotate(-90, 10, 220)">b</text>
+            </svg>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(0, 102, 255, 0.7)"></div>
+                    <span>a²</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(251, 191, 36, 0.7)"></div>
+                    <span>ab + ab = 2ab</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(236, 72, 153, 0.7)"></div>
+                    <span>b²</span>
+                </div>
+            </div>
+            <p class="visualizacion-descripcion">Un cuadrado de lado (a+b) se divide en cuatro regiones: a², dos rectangulos ab, y b².</p>
+        </div>
+    </div>
+
+    <!-- Modal 3: Cuadrado de una diferencia -->
+    <div id="canvas-diferencia" class="visualizacion-modal">
+        <div class="visualizacion-contenido">
+            <a class="cerrar-visualizacion" href="#formulas" aria-label="Cerrar visualizaciÃ³n">X</a>
+            <h3 class="visualizacion-titulo">Cuadrado de una diferencia</h3>
+            <svg width="280" height="280" viewBox="0 0 280 280">
+                <rect x="20" y="20" width="240" height="240" fill="rgba(0, 102, 255, 0.3)" stroke="var(--azul-electrico)" stroke-width="2"/>
+                <text x="140" y="140" text-anchor="middle" fill="var(--azul-electrico)" font-size="24" font-weight="bold">a²</text>
+                <rect x="20" y="20" width="160" height="160" fill="rgba(16, 185, 129, 0.7)" stroke="var(--verde)" stroke-width="3"/>
+                <text x="100" y="105" text-anchor="middle" fill="white" font-size="18" font-weight="bold">(a-b)²</text>
+                <rect x="180" y="20" width="80" height="160" fill="rgba(239, 68, 68, 0.5)" stroke="var(--rojo)" stroke-width="2" stroke-dasharray="5,5"/>
+                <text x="220" y="105" text-anchor="middle" fill="white" font-size="14">ab</text>
+                <rect x="20" y="180" width="160" height="80" fill="rgba(239, 68, 68, 0.5)" stroke="var(--rojo)" stroke-width="2" stroke-dasharray="5,5"/>
+                <text x="100" y="225" text-anchor="middle" fill="white" font-size="14">ab</text>
+                <rect x="180" y="180" width="80" height="80" fill="rgba(251, 191, 36, 0.7)" stroke="var(--amarillo)" stroke-width="2"/>
+                <text x="220" y="225" text-anchor="middle" fill="white" font-size="14">b²</text>
+            </svg>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(16, 185, 129, 0.7)"></div>
+                    <span>(a-b)²</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(239, 68, 68, 0.5)"></div>
+                    <span>Se resta 2ab</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(251, 191, 36, 0.7)"></div>
+                    <span>Se suma b²</span>
+                </div>
+            </div>
+            <p class="visualizacion-descripcion">De un cuadrado de lado a, restamos dos rectangulos ab y sumamos b² porque se resta dos veces.</p>
+        </div>
+    </div>
+</div>
+
+    <!-- Modal 6: Cubo de diferencia -->
+    <div id="canvas-cubo-diferencia" class="visualizacion-modal">
+        <div class="visualizacion-contenido">
+            <a class="cerrar-visualizacion" href="#formulas" aria-label="Cerrar visualizaciÃ³n">Ã·</a>
+            <h3 class="visualizacion-titulo">(a - b)Â³ - DescomposiciÃ³n</h3>
+            <svg width="400" height="300" viewBox="0 0 400 300">
+                <rect x="20" y="20" width="100" height="100" fill="rgba(0, 102, 255, 0.8)" stroke="var(--azul-electrico)" stroke-width="2"/>
+                <text x="70" y="75" text-anchor="middle" fill="white" font-size="16" font-weight="bold">aÂ³</text>
+                <rect x="130" y="20" width="80" height="100" fill="rgba(239, 68, 68, 0.6)" stroke="var(--rojo)" stroke-width="2" stroke-dasharray="5,5"/>
+                <text x="170" y="75" text-anchor="middle" fill="white" font-size="14" font-weight="bold">-aÂ²b</text>
+                <rect x="220" y="20" width="80" height="100" fill="rgba(239, 68, 68, 0.6)" stroke="var(--rojo)" stroke-width="2" stroke-dasharray="5,5"/>
+                <text x="260" y="75" text-anchor="middle" fill="white" font-size="14" font-weight="bold">-aÂ²b</text>
+                <rect x="310" y="20" width="80" height="100" fill="rgba(239, 68, 68, 0.6)" stroke="var(--rojo)" stroke-width="2" stroke-dasharray="5,5"/>
+                <text x="350" y="75" text-anchor="middle" fill="white" font-size="14" font-weight="bold">-aÂ²b</text>
+                <rect x="20" y="130" width="80" height="100" fill="rgba(251, 191, 36, 0.8)" stroke="var(--amarillo)" stroke-width="2"/>
+                <text x="60" y="185" text-anchor="middle" fill="white" font-size="14" font-weight="bold">+abÂ²</text>
+                <rect x="110" y="130" width="80" height="100" fill="rgba(251, 191, 36, 0.8)" stroke="var(--amarillo)" stroke-width="2"/>
+                <text x="150" y="185" text-anchor="middle" fill="white" font-size="14" font-weight="bold">+abÂ²</text>
+                <rect x="200" y="130" width="80" height="100" fill="rgba(251, 191, 36, 0.8)" stroke="var(--amarillo)" stroke-width="2"/>
+                <text x="240" y="185" text-anchor="middle" fill="white" font-size="14" font-weight="bold">+abÂ²</text>
+                <rect x="290" y="130" width="100" height="100" fill="rgba(239, 68, 68, 0.8)" stroke="var(--rojo)" stroke-width="2"/>
+                <text x="340" y="185" text-anchor="middle" fill="white" font-size="16" font-weight="bold">-bÂ³</text>
+            </svg>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(0, 102, 255, 0.8)"></div>
+                    <span>+aÂ³</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(239, 68, 68, 0.6)"></div>
+                    <span>-3aÂ²b (signos negativos)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(251, 191, 36, 0.8)"></div>
+                    <span>+3abÂ²</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(239, 68, 68, 0.8)"></div>
+                    <span>-bÂ³</span>
+                </div>
+            </div>
+            <p class="visualizacion-descripcion">Los signos alternan: +aÂ³, -3aÂ²b, +3abÂ², -bÂ³. Los bloques rojos representan tÃ©rminos negativos.</p>
+        </div>
+    </div>
+
+    <!-- Modal 7: Suma de cubos -->
+    <div id="canvas-suma-cubos" class="visualizacion-modal">
+        <div class="visualizacion-contenido">
+            <a class="cerrar-visualizacion" href="#formulas" aria-label="Cerrar visualizaciÃ³n">Ã·</a>
+            <h3 class="visualizacion-titulo">aÂ³ + bÂ³ = (a + b)(aÂ² - ab + bÂ²)</h3>
+            <svg width="400" height="280" viewBox="0 0 400 280">
+                <rect x="20" y="20" width="100" height="100" fill="rgba(0, 102, 255, 0.7)" stroke="var(--azul-electrico)" stroke-width="2"/>
+                <text x="70" y="75" text-anchor="middle" fill="white" font-size="16" font-weight="bold">aÂ³</text>
+                <rect x="150" y="20" width="100" height="100" fill="rgba(236, 72, 153, 0.7)" stroke="var(--fucsia)" stroke-width="2"/>
+                <text x="200" y="75" text-anchor="middle" fill="white" font-size="16" font-weight="bold">bÂ³</text>
+                <path d="M 120 70 L 140 70" stroke="var(--amarillo)" stroke-width="3" marker-end="url(#flecha2)"/>
+                <text x="130" y="60" text-anchor="middle" fill="var(--amarillo)" font-size="12">+</text>
+                <path d="M 200 130 L 200 150" stroke="var(--cian)" stroke-width="3" marker-end="url(#flecha2)"/>
+                <text x="220" y="145" text-anchor="middle" fill="var(--cian)" font-size="12">factorizar</text>
+                <rect x="20" y="160" width="120" height="100" fill="rgba(0, 102, 255, 0.5)" stroke="var(--azul-electrico)" stroke-width="2"/>
+                <text x="80" y="215" text-anchor="middle" fill="white" font-size="14" font-weight="bold">(a + b)</text>
+                <rect x="150" y="160" width="230" height="100" fill="rgba(16, 185, 129, 0.5)" stroke="var(--verde)" stroke-width="2"/>
+                <text x="265" y="200" text-anchor="middle" fill="white" font-size="12" font-weight="bold">(aÂ² - ab + bÂ²)</text>
+                <defs>
+                    <marker id="flecha2" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto">
+                        <path d="M0,0 L0,6 L9,3 z" fill="var(--amarillo)"/>
+                    </marker>
+                </defs>
+            </svg>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(0, 102, 255, 0.7)"></div>
+                    <span>aÂ³</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(236, 72, 153, 0.7)"></div>
+                    <span>bÂ³</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(0, 102, 255, 0.5)"></div>
+                    <span>Binomio (a + b)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(16, 185, 129, 0.5)"></div>
+                    <span>Trinomio (aÂ² - ab + bÂ²)</span>
+                </div>
+            </div>
+            <p class="visualizacion-descripcion">La suma de dos cubos se factoriza como un binomio (suma de bases) por un trinomio con signos alternados.</p>
+        </div>
+    </div>
+
+    <!-- Modal 8: Diferencia de cubos -->
+    <div id="canvas-diferencia-cubos" class="visualizacion-modal">
+        <div class="visualizacion-contenido">
+            <a class="cerrar-visualizacion" href="#formulas" aria-label="Cerrar visualizaciÃ³n">Ã·</a>
+            <h3 class="visualizacion-titulo">aÂ³ - bÂ³ = (a - b)(aÂ² + ab + bÂ²)</h3>
+            <svg width="400" height="280" viewBox="0 0 400 280">
+                <rect x="20" y="20" width="100" height="100" fill="rgba(0, 102, 255, 0.7)" stroke="var(--azul-electrico)" stroke-width="2"/>
+                <text x="70" y="75" text-anchor="middle" fill="white" font-size="16" font-weight="bold">aÂ³</text>
+                <rect x="150" y="20" width="100" height="100" fill="rgba(239, 68, 68, 0.7)" stroke="var(--rojo)" stroke-width="2"/>
+                <text x="200" y="75" text-anchor="middle" fill="white" font-size="16" font-weight="bold">bÂ³</text>
+                <path d="M 120 70 L 140 70" stroke="var(--rojo)" stroke-width="3"/>
+                <text x="130" y="60" text-anchor="middle" fill="var(--rojo)" font-size="18" font-weight="bold">-</text>
+                <path d="M 200 130 L 200 150" stroke="var(--cian)" stroke-width="3" marker-end="url(#flecha3)"/>
+                <text x="220" y="145" text-anchor="middle" fill="var(--cian)" font-size="12">factorizar</text>
+                <rect x="20" y="160" width="120" height="100" fill="rgba(239, 68, 68, 0.5)" stroke="var(--rojo)" stroke-width="2"/>
+                <text x="80" y="215" text-anchor="middle" fill="white" font-size="14" font-weight="bold">(a - b)</text>
+                <rect x="150" y="160" width="230" height="100" fill="rgba(251, 191, 36, 0.5)" stroke="var(--amarillo)" stroke-width="2"/>
+                <text x="265" y="200" text-anchor="middle" fill="white" font-size="12" font-weight="bold">(aÂ² + ab + bÂ²)</text>
+                <defs>
+                    <marker id="flecha3" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto">
+                        <path d="M0,0 L0,6 L9,3 z" fill="var(--cian)"/>
+                    </marker>
+                </defs>
+            </svg>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(0, 102, 255, 0.7)"></div>
+                    <span>aÂ³</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(239, 68, 68, 0.7)"></div>
+                    <span>bÂ³</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(239, 68, 68, 0.5)"></div>
+                    <span>Binomio (a - b)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(251, 191, 36, 0.5)"></div>
+                    <span>Trinomio (aÂ² + ab + bÂ²) todo positivo</span>
+                </div>
+            </div>
+            <p class="visualizacion-descripcion">La diferencia de dos cubos se factoriza como un binomio (diferencia de bases) por un trinomio con todos los signos positivos.</p>
+        </div>
+    </div>
 
     <!-- SECCION MISION PRACTICA -->
     <section id="mision">
