@@ -176,6 +176,71 @@
         .error-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; margin: 0.5rem 0; background: rgba(239, 68, 68, 0.1); border-radius: 10px; border-left: 4px solid var(--rojo); }
         .kit-heroe { background: linear-gradient(135deg, var(--azul-electrico), var(--morado)); border-radius: 20px; padding: 2rem; margin: 2rem 0; text-align: center; border: 3px solid var(--amarillo); box-shadow: 0 10px 40px rgba(0, 102, 255, 0.3); }
         @media (max-width: 768px) { .nav-links { justify-content: center; } .hero-title { font-size: 2.5rem; } .section-title { font-size: 2rem; } .formulas-grid, .visual-container { grid-template-columns: 1fr; } .lab-controls { grid-template-columns: 1fr; } }
+
+        body.modal-open {overflow: hidden;}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.78);
+}
+
+.modal.is-open {
+  display: flex;
+}
+
+.modal-content {
+  position: relative;
+  width: min(900px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: #ef4444;
+  color: #ffffff;
+  width: 38px;
+  height: 38px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: #b91c1c;
+}
+
+.visualization-button {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font: inherit;
+}
+
+#canvas-diferencia-cuadrados {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  margin: 20px auto 0;
+  border-radius: 12px;
+  background: #f8fbff;
+}
     </style>
 </head>
 <body>
@@ -243,7 +308,7 @@
                 <div class="formula-example"><strong>Ejemplo:</strong> (x + 5)(x - 5) = x&#178; - 5&#178; = x&#178; - 25</div>
                 <div class="alerta-villano"><span>⚠️</span><span><strong>Alerta de villano:</strong> ¡No hay término del medio! Los términos cruzados se cancelan.</span></div>
                 <div class="consejo-heroe">💡 <strong>Consejo del Veloz Factor:</strong> "Es la diferencia de cuadrados. ¡Rápido y directo!"</div>
-                <a class="btn-formula-visual" href="#canvas-diferencia-cuadrados">🔎 Ver visualización de esta fórmula</a>
+                <a class="btn-formula-visual" <button type="button" class="visualization-button" data-open-modal="modal-diferencia-cuadrados"> 🔎 Ver visualización de esta fórmula </button>
             </div>
             
             <!-- 2. Cuadrado de una suma -->
@@ -583,8 +648,128 @@
     </section>
 
     <!-- JAVASCRIPT -->
-    <script>
-        // Navegación y scroll
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const modalButtons = document.querySelectorAll("[data-open-modal]");
+  const closeButtons = document.querySelectorAll("[data-close-modal]");
+
+  modalButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const modalId = button.getAttribute("data-open-modal");
+      const modal = document.getElementById(modalId);
+
+      if (!modal) {
+        console.error("No existe el modal:", modalId);
+        return;
+      }
+
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+
+      if (modalId === "modal-diferencia-cuadrados") {
+        dibujarDiferenciaCuadrados();
+      }
+    });
+  });
+
+  closeButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const modal = button.closest(".modal");
+
+      if (!modal) return;
+
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    });
+  });
+
+  document.querySelectorAll(".modal").forEach(function (modal) {
+    modal.addEventListener("click", function (event) {
+      if (event.target === modal) {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+      }
+    });
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      document.querySelectorAll(".modal.is-open").forEach(function (modal) {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+      });
+
+      document.body.classList.remove("modal-open");
+    }
+  });
+});
+
+function dibujarDiferenciaCuadrados() {
+  const canvas = document.getElementById("canvas-diferencia-cuadrados");
+
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  const ancho = canvas.width;
+  const alto = canvas.height;
+
+  ctx.clearRect(0, 0, ancho, alto);
+
+  const x = 100;
+  const y = 75;
+  const ladoA = 320;
+  const ladoB = 170;
+
+  ctx.fillStyle = "#bfdbfe";
+  ctx.fillRect(x, y, ladoA, ladoA);
+
+  ctx.strokeStyle = "#102a43";
+  ctx.lineWidth = 4;
+  ctx.strokeRect(x, y, ladoA, ladoA);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(
+    x + ladoA - ladoB,
+    y + ladoA - ladoB,
+    ladoB,
+    ladoB
+  );
+
+  ctx.strokeStyle = "#b91c1c";
+  ctx.setLineDash([10, 8]);
+  ctx.strokeRect(
+    x + ladoA - ladoB,
+    y + ladoA - ladoB,
+    ladoB,
+    ladoB
+  );
+  ctx.setLineDash([]);
+
+  ctx.fillStyle = "#102a43";
+  ctx.font = "bold 28px Arial";
+  ctx.fillText("A²", x + 125, y + 145);
+
+  ctx.fillStyle = "#b91c1c";
+  ctx.font = "bold 24px Arial";
+  ctx.fillText(
+    "− B²",
+    x + ladoA - ladoB + 45,
+    y + ladoA - ladoB + 95
+  );
+
+  ctx.fillStyle = "#102a43";
+  ctx.font = "bold 26px Arial";
+  ctx.fillText("A² − B²", 480, 150);
+
+  ctx.font = "20px Arial";
+  ctx.fillText("Área del cuadrado grande", 480, 205);
+  ctx.fillText("menos el área del cuadrado pequeño", 480, 240);
+}
+</script>
+    // Navegación y scroll
         const btnVolverArriba = document.getElementById('btn-volver-arriba');
         const navLinks = document.querySelectorAll('.nav-links a');
         window.addEventListener('scroll', () => {
@@ -635,5 +820,39 @@
         function responderQuiz(el,pi,oi){const p=preguntasQuiz[pi],f=document.getElementById(`quiz-feedback-${pi}`);el.parentElement.querySelectorAll('.quiz-opcion').forEach(o=>{o.classList.remove('seleccionada','correcta','incorrecta');o.style.pointerEvents='none';});if(oi===p.correcta){el.classList.add('correcta');f.className='feedback correcto';f.innerHTML=`<strong>✅ ¡Correcto!</strong> ${p.explicacion}`;puntuacion+=20;actualizarPuntuacion();}else{el.classList.add('incorrecta');f.className='feedback incorrecto';f.innerHTML=`<strong>❌ Incorrecto.</strong> ${p.explicacion}`;}}
         generarEjercicios(); generarQuiz();
     </script>
+    <div
+  id="modal-diferencia-cuadrados"
+  class="modal"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="titulo-modal-diferencia-cuadrados">
+
+  <div class="modal-content">
+    <button
+      type="button"
+      class="modal-close"
+      data-close-modal
+      aria-label="Cerrar">
+      ✕
+    </button>
+
+    <h2 id="titulo-modal-diferencia-cuadrados">
+      Visualización de la diferencia de cuadrados
+    </h2>
+
+    <p>
+      La expresión
+      \(A^2-B^2\)
+      representa el área de un cuadrado grande menos el área de un cuadrado pequeño.
+    </p>
+
+    <canvas
+      id="canvas-diferencia-cuadrados"
+      width="800"
+      height="500">
+    </canvas>
+  </div>
+</div>
 </body>
 </html>
