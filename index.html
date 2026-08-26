@@ -931,634 +931,143 @@
     </section>
 
    <!-- JAVASCRIPT -->
-    <script>
-'use strict';
+  <script>
+(function () {
+  'use strict';
 
-let operacionActual = 'suma';
-let operacionCuboActual = 'suma';
-let nivelActual = 1;
-let puntuacion = 0;
-let ejerciciosCompletados = 0;
-let cuboAnimando = false;
-let cuboAnimacionId = null;
-let cuboAnguloX = 0.5;
-let cuboAnguloY = 0.5;
-let cuboArrastrando = false;
-let cuboUltimoX = 0;
-let cuboUltimoY = 0;
-
-function $(id) {
-    return document.getElementById(id);
-}
-
-function actualizarLab() {
-    const inputA = $('valor-a');
-    const inputB = $('valor-b');
-    const resultado = $('lab-resultado');
-    if (!inputA || !inputB || !resultado) return;
-
-    const a = Number(inputA.value);
-    const b = Number(inputB.value);
-    const signo = operacionActual === 'suma' ? '+' : '−';
-    const segundo = operacionActual === 'suma' ? b : -b;
-    const izquierda = Math.pow(a + segundo, 2);
-    const derecha = Math.pow(a, 2) + (operacionActual === 'suma' ? 2 * a * b : -2 * a * b) + Math.pow(b, 2);
-
-    if ($('valor-a-display')) $('valor-a-display').textContent = `a = ${a}`;
-    if ($('valor-b-display')) $('valor-b-display').textContent = `b = ${b}`;
-
-    resultado.innerHTML = `
-        <div class="formula-math">(a ${signo} b)² = a² ${signo} 2ab + b²</div>
-        <div class="lab-equality verificada">
-            <strong>Lado izquierdo:</strong> (${a} ${signo} ${b})² = ${izquierda}<br>
-            <strong>Lado derecho:</strong> ${a}² ${signo} 2(${a})(${b}) + ${b}² = ${derecha}<br>
-            <strong>✅ ¡La igualdad se verifica!</strong>
-        </div>`;
-}
-
-function cambiarOperacion(tipo) {
-    operacionActual = tipo;
-    actualizarLab();
-}
-
-function actualizarLabCubo() {
-    const inputA = $('valor-a-cubo');
-    const inputB = $('valor-b-cubo');
-    const resultado = $('lab-resultado-cubo');
-    if (!inputA || !inputB || !resultado) return;
-
-    const a = Number(inputA.value);
-    const b = Number(inputB.value);
-    const signo = operacionCuboActual === 'suma' ? '+' : '−';
-    const segundo = operacionCuboActual === 'suma' ? b : -b;
-    const izquierda = Math.pow(a + segundo, 3);
-    const derecha = Math.pow(a, 3) +
-        (operacionCuboActual === 'suma' ? 3 : -3) * Math.pow(a, 2) * b +
-        3 * a * Math.pow(b, 2) +
-        (operacionCuboActual === 'suma' ? 1 : -1) * Math.pow(b, 3);
-
-    if ($('valor-a-cubo-display')) $('valor-a-cubo-display').textContent = `a = ${a}`;
-    if ($('valor-b-cubo-display')) $('valor-b-cubo-display').textContent = `b = ${b}`;
-
-    resultado.innerHTML = `
-        <div class="formula-math">(a ${signo} b)³ = a³ ${signo} 3a²b + 3ab² ${signo} b³</div>
-        <div class="lab-equality verificada">
-            <strong>Lado izquierdo:</strong> (${a} ${signo} ${b})³ = ${izquierda}<br>
-            <strong>Lado derecho:</strong> ${derecha}<br>
-            <strong>✅ ¡La igualdad se verifica!</strong>
-        </div>`;
-}
-
-function cambiarOperacionCubo(tipo) {
-    operacionCuboActual = tipo;
-    actualizarLabCubo();
-}
-
-function normalizar(texto) {
-    return String(texto)
-        .toLowerCase()
-        .replace(/\s+/g, '')
-        .replace(/²/g, '^2')
-        .replace(/³/g, '^3')
-        .replace(/−/g, '-')
-        .replace(/·/g, '')
-        .replace(/\*\*/g, '^');
-}
-
-const respuestas = [
-    ['x^2+6x+9', 'x^2+6*x+9'],
-    ['y^2-12y+36', 'y^2-12*y+36'],
-    ['a^2-9', 'a^2-9'],
-    ['x^2+7x+10', 'x^2+7*x+10']
-];
-
-function comprobarRespuesta(indice) {
-    const entrada = $(`input-${indice}`);
-    const feedback = $(`feedback-${indice}`);
-    if (!entrada || !feedback) return;
-
-    const respuesta = normalizar(entrada.value);
-    const correcta = respuestas[indice] || [];
-    const esCorrecta = correcta.some(valor => normalizar(valor) === respuesta);
-
-    feedback.className = esCorrecta ? 'feedback correcto' : 'feedback incorrecto';
-    feedback.innerHTML = esCorrecta
-        ? '✅ <strong>¡Correcto!</strong> Poder algebraico activado.'
-        : '❌ <strong>Aún no.</strong> Revisa los signos, exponentes y términos.';
-
-    if (esCorrecta && !entrada.dataset.resuelta) {
-        entrada.dataset.resuelta = 'true';
-        puntuacion += 10;
-        ejerciciosCompletados++;
-        if ($('puntuacion-total')) $('puntuacion-total').textContent = puntuacion;
-    }
-}
-
-function mostrarPista(indice) {
-    const pista = $(`pista-${indice}`);
-    if (pista) pista.style.display = pista.style.display === 'none' ? 'block' : 'none';
-}
-
-function cambiarNivel(nivel) {
-    nivelActual = nivel;
-    document.querySelectorAll('.btn-nivel').forEach((boton, indice) => {
-        boton.classList.toggle('activo', indice === nivel - 1);
-    });
-}
-
-function responderQuiz(elemento, pregunta, opcion) {
-    const correctas = [1, 2, 2, 1];
-    const feedback = $(`quiz-feedback-${pregunta}`);
-    if (!feedback) return;
-
-    document.querySelectorAll(`[onclick*="responderQuiz(this,${pregunta},"]`).forEach(op => {
-        op.classList.remove('correcta', 'incorrecta');
-    });
-
-    if (opcion === correctas[pregunta]) {
-        elemento.classList.add('correcta');
-        feedback.className = 'feedback correcto';
-        feedback.textContent = '✅ ¡Respuesta correcta!';
-    } else {
-        elemento.classList.add('incorrecta');
-        feedback.className = 'feedback incorrecto';
-        feedback.textContent = '❌ Esa opción no es correcta. Revisa la fórmula.';
-    }
-}
-
-function proyectar(x, y, z, canvas) {
-    const escala = 80;
-    const x2 = x * Math.cos(cuboAnguloY) - z * Math.sin(cuboAnguloY);
-    const z2 = x * Math.sin(cuboAnguloY) + z * Math.cos(cuboAnguloY);
-    const y2 = y * Math.cos(cuboAnguloX) - z2 * Math.sin(cuboAnguloX);
-    return { x: canvas.width / 2 + x2 * escala, y: canvas.height / 2 - y2 * escala };
-}
-
-function dibujarCubo() {
-    const canvas = $('canvas3d');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const vertices = [
-        [-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],
-        [-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]
-    ];
-
-    const caras = [
-        [[0,1,2,3], 'rgba(0,102,255,.8)'],
-        [[1,5,6,2], 'rgba(251,191,36,.8)'],
-        [[5,4,7,6], 'rgba(236,72,153,.8)'],
-        [[4,0,3,7], 'rgba(107,33,168,.8)'],
-        [[3,2,6,7], 'rgba(0,182,212,.8)'],
-        [[4,5,1,0], 'rgba(16,185,129,.8)']
-    ];
-
-    caras.forEach(([indices, color]) => {
-        const puntos = indices.map(i => proyectar(...vertices[i], canvas));
-        ctx.beginPath();
-        ctx.moveTo(puntos[0].x, puntos[0].y);
-        puntos.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
-        ctx.closePath();
-        ctx.fillStyle = color;
-        ctx.fill();
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-    });
-
-    ctx.fillStyle = '#fbbf24';
-    ctx.font = 'bold 17px Arial';
-    ctx.fillText('(a ± b)³', 20, 28);
-
-    if (cuboAnimando) {
-        cuboAnguloY += .02;
-        cuboAnimacionId = requestAnimationFrame(dibujarCubo);
-    }
-}
-
-function animarCubo() {
-    cuboAnimando = true;
-    dibujarCubo();
-}
-
-function pausarCubo() {
-    cuboAnimando = false;
-    if (cuboAnimacionId) cancelAnimationFrame(cuboAnimacionId);
-}
-
-function reiniciarCubo() {
-    pausarCubo();
-    cuboAnguloX = .5;
-    cuboAnguloY = .5;
-    dibujarCubo();
-}
-
-function iniciarEventos() {
-    const inputA = $('valor-a');
-    const inputB = $('valor-b');
-    const inputACubo = $('valor-a-cubo');
-    const inputBCubo = $('valor-b-cubo');
-
-    if (inputA) inputA.addEventListener('input', actualizarLab);
-    if (inputB) inputB.addEventListener('input', actualizarLab);
-    if (inputACubo) inputACubo.addEventListener('input', actualizarLabCubo);
-    if (inputBCubo) inputBCubo.addEventListener('input', actualizarLabCubo);
-
-    const botonArriba = $('btn-volver-arriba');
-    if (botonArriba) {
-        window.addEventListener('scroll', () => {
-            botonArriba.style.display = window.scrollY > 500 ? 'block' : 'none';
-        });
-        botonArriba.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    }
-
-    const canvas = $('canvas3d');
-    if (canvas) {
-        canvas.addEventListener('mousedown', event => {
-            cuboArrastrando = true;
-            cuboUltimoX = event.clientX;
-            cuboUltimoY = event.clientY;
-            pausarCubo();
-        });
-        canvas.addEventListener('mousemove', event => {
-            if (!cuboArrastrando) return;
-            cuboAnguloY += (event.clientX - cuboUltimoX) * .01;
-            cuboAnguloX += (event.clientY - cuboUltimoY) * .01;
-            cuboUltimoX = event.clientX;
-            cuboUltimoY = event.clientY;
-            dibujarCubo();
-        });
-        canvas.addEventListener('mouseup', () => cuboArrastrando = false);
-        canvas.addEventListener('mouseleave', () => cuboArrastrando = false);
-    }
-
-    actualizarLab();
-    actualizarLabCubo();
-    dibujarCubo();
-}
-
-document.addEventListener('DOMContentLoaded', iniciarEventos);
-        
-   /* ==========================================
-   MISION PRACTICA: NIVELES FUNCIONALES
-   ========================================== */
-
-let nivelActual = 1;
-
-const ejerciciosPorNivel = {
+  var ejerciciosPorNivel = {
     1: [
-        {
-            titulo: "Detecta el poder",
-            pregunta: "¿Qué producto notable se usa en (x + 5)²?",
-            opciones: [
-                "Cuadrado de una suma",
-                "Cuadrado de una diferencia",
-                "Suma por diferencia",
-                "Diferencia de cubos"
-            ],
-            correcta: 0,
-            explicacion: "Correcto: es un binomio con signo positivo elevado al cuadrado, por eso usamos el cuadrado de una suma."
-        },
-        {
-            titulo: "Reconoce la fórmula",
-            pregunta: "¿Cuál es el resultado de (a + b)(a − b)?",
-            opciones: [
-                "a² + 2ab + b²",
-                "a² − b²",
-                "a² − 2ab + b²",
-                "a³ − b³"
-            ],
-            correcta: 1,
-            explicacion: "Correcto: la suma por diferencia de términos iguales produce una diferencia de cuadrados."
-        },
-        {
-            titulo: "Detecta el signo",
-            pregunta: "¿Cuál es el término central de (A − B)²?",
-            opciones: [
-                "+2AB",
-                "−2AB",
-                "+AB",
-                "−AB"
-            ],
-            correcta: 1,
-            explicacion: "Correcto: (A − B)² = A² − 2AB + B²."
-        }
+      { pregunta: '¿Qué producto notable se usa en (x + 5)²?', opciones: ['Cuadrado de una suma', 'Cuadrado de una diferencia', 'Suma por diferencia', 'Diferencia de cubos'], correcta: 0, explicacion: 'Es un binomio con signo positivo elevado al cuadrado.' },
+      { pregunta: '¿Cuál es el resultado de (a + b)(a − b)?', opciones: ['a² + 2ab + b²', 'a² − b²', 'a² − 2ab + b²', 'a³ − b³'], correcta: 1, explicacion: 'La suma por diferencia produce una diferencia de cuadrados.' },
+      { pregunta: '¿Cuál es el término central de (A − B)²?', opciones: ['+2AB', '−2AB', '+AB', '−AB'], correcta: 1, explicacion: '(A − B)² = A² − 2AB + B².' }
     ],
-
     2: [
-        {
-            titulo: "Desarrolla el cuadrado",
-            pregunta: "Desarrolla: (x + 3)²",
-            respuesta: "x^2+6x+9",
-            pista: "Aplica: (A + B)² = A² + 2AB + B².",
-            solucion: "(x + 3)² = x² + 2(x)(3) + 3² = x² + 6x + 9."
-        },
-        {
-            titulo: "Desarrolla la diferencia",
-            pregunta: "Desarrolla: (x − 4)²",
-            respuesta: "x^2-8x+16",
-            pista: "El término del medio debe ser negativo.",
-            solucion: "(x − 4)² = x² − 2(x)(4) + 4² = x² − 8x + 16."
-        },
-        {
-            titulo: "Activa el cubo",
-            pregunta: "Desarrolla: (x + 2)³",
-            respuesta: "x^3+6x^2+12x+8",
-            pista: "Los coeficientes son 1, 3, 3, 1.",
-            solucion: "(x + 2)³ = x³ + 3(x²)(2) + 3(x)(2²) + 2³ = x³ + 6x² + 12x + 8."
-        }
+      { pregunta: 'Desarrolla: (x + 3)²', respuesta: 'x^2+6x+9', pista: 'Usa A² + 2AB + B².', solucion: '(x + 3)² = x² + 2(x)(3) + 3² = x² + 6x + 9.' },
+      { pregunta: 'Desarrolla: (x − 4)²', respuesta: 'x^2-8x+16', pista: 'El término central es negativo y el último es positivo.', solucion: '(x − 4)² = x² − 2(x)(4) + 4² = x² − 8x + 16.' },
+      { pregunta: 'Desarrolla: (x + 2)³', respuesta: 'x^3+6x^2+12x+8', pista: 'Los coeficientes son 1, 3, 3 y 1.', solucion: '(x + 2)³ = x³ + 6x² + 12x + 8.' }
     ],
-
     3: [
-        {
-            titulo: "Factoriza la diferencia",
-            pregunta: "Factoriza: x² − 49",
-            respuesta: "(x-7)(x+7)",
-            alternas: ["(x+7)(x-7)"],
-            pista: "Es una diferencia de cuadrados: x² − 7².",
-            solucion: "x² − 49 = x² − 7² = (x − 7)(x + 7)."
-        },
-        {
-            titulo: "Factoriza el cuadrado perfecto",
-            pregunta: "Factoriza: x² + 10x + 25",
-            respuesta: "(x+5)^2",
-            alternas: ["(x+5)(x+5)"],
-            pista: "Busca dos cuadrados y un término central igual a 2AB.",
-            solucion: "x² + 10x + 25 = x² + 2(x)(5) + 5² = (x + 5)²."
-        },
-        {
-            titulo: "Factoriza diferencia de cubos",
-            pregunta: "Factoriza: x³ − 8",
-            respuesta: "(x-2)(x^2+2x+4)",
-            alternas: ["(x^2+2x+4)(x-2)"],
-            pista: "Recuerda: A³ − B³ = (A − B)(A² + AB + B²).",
-            solucion: "x³ − 8 = x³ − 2³ = (x − 2)(x² + 2x + 4)."
-        }
+      { pregunta: 'Factoriza: x² − 49', respuesta: '(x-7)(x+7)', alternas: ['(x+7)(x-7)'], pista: 'Es una diferencia de cuadrados.', solucion: 'x² − 49 = x² − 7² = (x − 7)(x + 7).' },
+      { pregunta: 'Factoriza: x² + 10x + 25', respuesta: '(x+5)^2', alternas: ['(x+5)(x+5)'], pista: 'Es un trinomio cuadrado perfecto.', solucion: 'x² + 10x + 25 = (x + 5)².' },
+      { pregunta: 'Factoriza: x³ − 8', respuesta: '(x-2)(x^2+2x+4)', alternas: ['(x^2+2x+4)(x-2)'], pista: 'Es una diferencia de cubos.', solucion: 'x³ − 8 = x³ − 2³ = (x − 2)(x² + 2x + 4).' }
     ],
-
     4: [
-        {
-            titulo: "Misión final: identifica",
-            pregunta: "¿Qué fórmula debes usar para desarrollar (2x − 3)³?",
-            opciones: [
-                "Cuadrado de una diferencia",
-                "Cubo de una diferencia",
-                "Suma por diferencia",
-                "Suma de cubos"
-            ],
-            correcta: 1,
-            explicacion: "Correcto: se trata de un binomio con una resta elevado al cubo."
-        },
-        {
-            titulo: "Misión final: desarrolla",
-            pregunta: "Desarrolla: (x + 6)(x − 6)",
-            respuesta: "x^2-36",
-            pista: "Es suma por diferencia: (A + B)(A − B).",
-            solucion: "(x + 6)(x − 6) = x² − 6² = x² − 36."
-        },
-        {
-            titulo: "Misión final: factoriza",
-            pregunta: "Factoriza: x³ + 27",
-            respuesta: "(x+3)(x^2-3x+9)",
-            alternas: ["(x^2-3x+9)(x+3)"],
-            pista: "Es una suma de cubos: x³ + 3³.",
-            solucion: "x³ + 27 = x³ + 3³ = (x + 3)(x² − 3x + 9)."
-        }
+      { pregunta: '¿Qué fórmula debes usar para desarrollar (2x − 3)³?', opciones: ['Cuadrado de una diferencia', 'Cubo de una diferencia', 'Suma por diferencia', 'Suma de cubos'], correcta: 1, explicacion: 'Es un binomio con resta elevado al cubo.' },
+      { pregunta: 'Desarrolla: (x + 6)(x − 6)', respuesta: 'x^2-36', pista: 'Es suma por diferencia.', solucion: '(x + 6)(x − 6) = x² − 6² = x² − 36.' },
+      { pregunta: 'Factoriza: x³ + 27', respuesta: '(x+3)(x^2-3x+9)', alternas: ['(x^2-3x+9)(x+3)'], pista: 'Es una suma de cubos: x³ + 3³.', solucion: 'x³ + 27 = (x + 3)(x² − 3x + 9).' }
     ]
-};
+  };
 
-function normalizarRespuesta(respuesta) {
-    return respuesta
-        .toLowerCase()
-        .replace(/\s/g, "")
-        .replace(/²/g, "^2")
-        .replace(/³/g, "^3")
-        .replace(/−/g, "-")
-        .replace(/\*\*/g, "^");
-}
+  function normalizar(valor) {
+    return String(valor || '').toLowerCase().replace(/\s+/g, '').replace(/²/g, '^2').replace(/³/g, '^3').replace(/−/g, '-').replace(/\*\*/g, '^');
+  }
 
-function cambiarNivel(nivel) {
-    nivelActual = nivel;
-
-    document.querySelectorAll(".btn-nivel").forEach(function (boton, indice) {
-        boton.classList.toggle("activo", indice === nivel - 1);
+  function nivelBotones(nivel) {
+    document.querySelectorAll('.btn-nivel').forEach(function (boton, indice) {
+      boton.classList.toggle('activo', indice === nivel - 1);
     });
+  }
 
-    const contenedor = document.getElementById("ejercicios-container");
+  window.cambiarNivel = function (nivel) {
+    nivelBotones(nivel);
+    var contenedor = document.getElementById('ejercicios-container');
+    if (!contenedor) return;
 
-    if (!contenedor) {
-        console.error("No existe el contenedor ejercicios-container");
-        return;
-    }
-
-    const ejercicios = ejerciciosPorNivel[nivel];
-
-    let html = `
-        <div style="text-align:center; margin-bottom: 1.5rem;">
-            <h3 style="color: var(--cian);">
-                ${nivel === 1 ? "Nivel 1: Detectar el producto notable" : ""}
-                ${nivel === 2 ? "Nivel 2: Desarrollar expresiones" : ""}
-                ${nivel === 3 ? "Nivel 3: Factorizar expresiones" : ""}
-                ${nivel === 4 ? "Nivel 4: Misión final del héroe algebraico" : ""}
-            </h3>
-        </div>
-    `;
+    var ejercicios = ejerciciosPorNivel[nivel] || [];
+    var titulo = nivel === 1 ? 'Nivel 1: Identificar' : nivel === 2 ? 'Nivel 2: Desarrollar' : nivel === 3 ? 'Nivel 3: Factorizar' : 'Nivel 4: Misión Final';
+    var html = '<div style="text-align:center;margin-bottom:1.5rem"><h3 style="color:var(--cian)">' + titulo + '</h3></div>';
 
     ejercicios.forEach(function (ejercicio, indice) {
-        const numero = indice + 1;
-        const id = `nivel-${nivel}-ejercicio-${numero}`;
+      var id = 'nivel-' + nivel + '-' + indice;
+      html += '<div class="ejercicio-card"><div class="ejercicio-enunciado">' + ejercicio.pregunta + '</div>';
 
-        html += `
-            <div class="ejercicio-card">
-                <h3 style="color: var(--amarillo); margin-bottom: 0.75rem;">
-                    ⚡ ${ejercicio.titulo}
-                </h3>
-
-                <div class="ejercicio-enunciado">
-                    ${ejercicio.pregunta}
-                </div>
-        `;
-
-        if (ejercicio.opciones) {
-            html += `
-                <div class="quiz-opciones" id="${id}-opciones">
-            `;
-
-            ejercicio.opciones.forEach(function (opcion, opcionIndice) {
-                html += `
-                    <div
-                        class="quiz-opcion"
-                        onclick="verificarOpcion(${nivel}, ${indice}, ${opcionIndice}, '${id}')">
-                        ${String.fromCharCode(65 + opcionIndice)}. ${opcion}
-                    </div>
-                `;
-            });
-
-            html += `
-                </div>
-                <div class="feedback" id="${id}-feedback"></div>
-            `;
-        } else {
-            html += `
-                <input
-                    type="text"
-                    id="${id}-respuesta"
-                    class="ejercicio-input"
-                    placeholder="Escribe tu respuesta aquí">
-
-                <div>
-                    <button
-                        class="btn-comprobar"
-                        onclick="verificarRespuesta(${nivel}, ${indice}, '${id}')">
-                        Comprobar
-                    </button>
-
-                    <button
-                        class="btn-pista"
-                        onclick="mostrarPista(${nivel}, ${indice}, '${id}')">
-                        Ver pista
-                    </button>
-
-                    <button
-                        class="btn-pista"
-                        onclick="mostrarSolucion(${nivel}, ${indice}, '${id}')">
-                        Ver solución
-                    </button>
-                </div>
-
-                <div class="feedback" id="${id}-feedback"></div>
-            `;
-        }
-
-        html += `
-            </div>
-        `;
+      if (ejercicio.opciones) {
+        html += '<div class="quiz-opciones" id="' + id + '-opciones">';
+        ejercicio.opciones.forEach(function (opcion, opcionIndice) {
+          html += '<div class="quiz-opcion" data-opcion="' + opcionIndice + '" role="button" tabindex="0">' + String.fromCharCode(65 + opcionIndice) + '. ' + opcion + '</div>';
+        });
+        html += '</div><div class="feedback" id="' + id + '-feedback"></div>';
+      } else {
+        html += '<input class="ejercicio-input" id="' + id + '-respuesta" type="text" placeholder="Escribe tu respuesta">';
+        html += '<button class="btn-comprobar" type="button" data-action="comprobar">Comprobar</button>';
+        html += '<button class="btn-pista" type="button" data-action="pista">Ver pista</button>';
+        html += '<button class="btn-pista" type="button" data-action="solucion">Ver solución</button>';
+        html += '<div class="feedback" id="' + id + '-feedback"></div>';
+      }
+      html += '</div>';
     });
 
     contenedor.innerHTML = html;
-}
 
-function verificarOpcion(nivel, indiceEjercicio, indiceOpcion, id) {
-    const ejercicio = ejerciciosPorNivel[nivel][indiceEjercicio];
-    const opciones = document.querySelectorAll(`#${id}-opciones .quiz-opcion`);
-    const feedback = document.getElementById(`${id}-feedback`);
-
-    opciones.forEach(function (opcion) {
-        opcion.style.pointerEvents = "none";
-    });
-
-    if (indiceOpcion === ejercicio.correcta) {
-        opciones[indiceOpcion].classList.add("correcta");
-
-        feedback.className = "feedback correcto";
-        feedback.innerHTML = `
-            ✅ <strong>¡Correcto!</strong><br>
-            ${ejercicio.explicacion}
-        `;
-
-        sumarPuntos(10);
-    } else {
-        opciones[indiceOpcion].classList.add("incorrecta");
-        opciones[ejercicio.correcta].classList.add("correcta");
-
-        feedback.className = "feedback incorrecto";
-        feedback.innerHTML = `
-            ❌ <strong>Respuesta incorrecta.</strong><br>
-            ${ejercicio.explicacion}
-        `;
-    }
-}
-
-function verificarRespuesta(nivel, indiceEjercicio, id) {
-    const ejercicio = ejerciciosPorNivel[nivel][indiceEjercicio];
-    const input = document.getElementById(`${id}-respuesta`);
-    const feedback = document.getElementById(`${id}-feedback`);
-
-    const respuestaUsuario = normalizarRespuesta(input.value);
-    const respuestaCorrecta = normalizarRespuesta(ejercicio.respuesta);
-
-    let esCorrecta = respuestaUsuario === respuestaCorrecta;
-
-    if (!esCorrecta && ejercicio.alternas) {
-        esCorrecta = ejercicio.alternas.some(function (respuestaAlterna) {
-            return normalizarRespuesta(respuestaAlterna) === respuestaUsuario;
+    contenedor.querySelectorAll('.ejercicio-card').forEach(function (tarjeta, indice) {
+      var ejercicio = ejercicios[indice];
+      var id = 'nivel-' + nivel + '-' + indice;
+      if (ejercicio.opciones) {
+        tarjeta.querySelectorAll('.quiz-opcion').forEach(function (opcion) {
+          function elegir() {
+            var elegido = Number(opcion.dataset.opcion);
+            var feedback = document.getElementById(id + '-feedback');
+            tarjeta.querySelectorAll('.quiz-opcion').forEach(function (item) { item.style.pointerEvents = 'none'; });
+            if (elegido === ejercicio.correcta) {
+              opcion.classList.add('correcta');
+              feedback.className = 'feedback correcto';
+              feedback.innerHTML = '✅ <strong>¡Correcto!</strong><br>' + ejercicio.explicacion;
+              sumarPuntos(10);
+            } else {
+              opcion.classList.add('incorrecta');
+              feedback.className = 'feedback incorrecto';
+              feedback.innerHTML = '❌ <strong>Incorrecto.</strong><br>La respuesta correcta era: ' + ejercicio.opciones[ejercicio.correcta] + '.<br>' + ejercicio.explicacion;
+            }
+          }
+          opcion.addEventListener('click', elegir);
+          opcion.addEventListener('keydown', function (event) { if (event.key === 'Enter' || event.key === ' ') elegir(); });
         });
-    }
+      } else {
+        tarjeta.querySelector('[data-action="comprobar"]').addEventListener('click', function () {
+          var respuesta = normalizar(document.getElementById(id + '-respuesta').value);
+          var correctas = [ejercicio.respuesta].concat(ejercicio.alternas || []).map(normalizar);
+          var feedback = document.getElementById(id + '-feedback');
+          if (correctas.indexOf(respuesta) !== -1) {
+            feedback.className = 'feedback correcto';
+            feedback.textContent = '✅ ¡Correcto, héroe algebraico!';
+            sumarPuntos(10);
+          } else {
+            feedback.className = 'feedback incorrecto';
+            feedback.textContent = '❌ Revisa los signos, exponentes y términos.';
+          }
+        });
+        tarjeta.querySelector('[data-action="pista"]').addEventListener('click', function () {
+          var feedback = document.getElementById(id + '-feedback');
+          feedback.className = 'feedback';
+          feedback.style.display = 'block';
+          feedback.style.background = 'rgba(251,191,36,.15)';
+          feedback.style.border = '2px solid var(--amarillo)';
+          feedback.textContent = '💡 Pista: ' + ejercicio.pista;
+        });
+        tarjeta.querySelector('[data-action="solucion"]').addEventListener('click', function () {
+          var feedback = document.getElementById(id + '-feedback');
+          feedback.className = 'feedback correcto';
+          feedback.textContent = '📘 Solución: ' + ejercicio.solucion;
+        });
+      }
+    });
+  };
 
-    if (esCorrecta) {
-        feedback.className = "feedback correcto";
-        feedback.innerHTML = `
-            ✅ <strong>¡Excelente, héroe algebraico!</strong><br>
-            Tu respuesta es correcta.
-        `;
+  function sumarPuntos(cantidad) {
+    var elemento = document.getElementById('puntuacion-total');
+    if (!elemento) return;
+    var puntos = Number(elemento.textContent) || 0;
+    elemento.textContent = puntos + cantidad;
+    [1, 2, 3, 4].forEach(function (numero) {
+      var medalla = document.getElementById('medalla-' + numero);
+      if (medalla && puntos + cantidad >= numero * 10) medalla.classList.add('obtenida');
+    });
+  }
 
-        sumarPuntos(10);
-    } else {
-        feedback.className = "feedback incorrecto";
-        feedback.innerHTML = `
-            ❌ <strong>Aún no es correcto.</strong><br>
-            Revisa los signos, los exponentes y la estructura de la fórmula.
-        `;
-    }
-}
-
-function mostrarPista(nivel, indiceEjercicio, id) {
-    const ejercicio = ejerciciosPorNivel[nivel][indiceEjercicio];
-    const feedback = document.getElementById(`${id}-feedback`);
-
-    feedback.className = "feedback";
-    feedback.style.display = "block";
-    feedback.style.background = "rgba(251, 191, 36, 0.15)";
-    feedback.style.border = "2px solid var(--amarillo)";
-    feedback.innerHTML = `
-        💡 <strong>Pista:</strong><br>
-        ${ejercicio.pista}
-    `;
-}
-
-function mostrarSolucion(nivel, indiceEjercicio, id) {
-    const ejercicio = ejerciciosPorNivel[nivel][indiceEjercicio];
-    const feedback = document.getElementById(`${id}-feedback`);
-
-    feedback.className = "feedback correcto";
-    feedback.innerHTML = `
-        📘 <strong>Solución paso a paso:</strong><br>
-        ${ejercicio.solucion}
-    `;
-}
-
-function sumarPuntos(cantidad) {
-    const puntuacion = document.getElementById("puntuacion-total");
-
-    if (!puntuacion) return;
-
-    let puntosActuales = Number(puntuacion.textContent) || 0;
-    puntosActuales += cantidad;
-
-    puntuacion.textContent = puntosActuales;
-
-    if (puntosActuales >= 10) {
-        document.getElementById("medalla-1")?.classList.add("obtenida");
-    }
-
-    if (puntosActuales >= 40) {
-        document.getElementById("medalla-2")?.classList.add("obtenida");
-    }
-
-    if (puntosActuales >= 80) {
-        document.getElementById("medalla-3")?.classList.add("obtenida");
-    }
-
-    if (puntosActuales >= 120) {
-        document.getElementById("medalla-4")?.classList.add("obtenida");
-    }
-}
-
-/* Muestra Nivel 1 automáticamente al abrir la página */
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener('DOMContentLoaded', function () {
     cambiarNivel(1);
-});
+  });
+})();
 </script>
 </body>
 </html>
