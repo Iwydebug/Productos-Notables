@@ -922,13 +922,234 @@
     </section>
 
     <!-- SECCION RESUMEN -->
-    <section id="resumen">
-        <h2 class="section-title">Resumen del héroe</h2>
-        <p class="section-subtitle">Todo lo que necesitas recordar en un solo lugar. ¡Tu kit de supervivencia algebraica!</p>
-        <table class="resumen-tabla"><thead><tr><th>Producto notable</th><th>Fórmula</th><th>Pista de reconocimiento</th></tr></thead><tbody><tr><td><strong>Cuadrado de suma</strong></td><td>(a + b)&#178; = a&#178; + 2ab + b&#178;</td><td>Binomio al cuadrado con signo +</td></tr><tr><td><strong>Cuadrado de diferencia</strong></td><td>(a - b)&#178; = a&#178; - 2ab + b&#178;</td><td>Binomio al cuadrado con signo −</td></tr><tr><td><strong>Suma por diferencia</strong></td><td>(a + b)(a - b) = a&#178; - b&#178;</td><td>Dos binomios iguales, uno suma y otro resta</td></tr><tr><td><strong>Binomios con término común</strong></td><td>(x + a)(x + b) = x&#178; + (a+b)x + ab</td><td>Dos binomios que comparten una letra</td></tr><tr><td><strong>Cubo de suma</strong></td><td>(a + b)&#179; = a&#179; + 3a&#178;b + 3ab&#178; + b&#179;</td><td>Binomio al cubo con signo +</td></tr><tr><td><strong>Cubo de diferencia</strong></td><td>(a - b)&#179; = a&#179; - 3a&#178;b + 3ab&#178; - b&#179;</td><td>Binomio al cubo con signo −</td></tr><tr><td><strong>Suma de cubos</strong></td><td>a&#179; + b&#179; = (a + b)(a&#178; - ab + b&#178;)</td><td>Dos cubos sumados para factorizar</td></tr><tr><td><strong>Diferencia de cubos</strong></td><td>a&#179; - b&#179; = (a - b)(a&#178; + ab + b&#178;)</td><td>Dos cubos restados para factorizar</td></tr></tbody></table>
-        <div class="errores-lista"><h3 style="color: var(--rojo); margin-bottom: 1.5rem; text-align: center;">⚠️ Errores frecuentes - ¡Evita estas trampas!</h3><div class="error-item"><span style="font-size: 1.5rem;">❌</span><div><strong>Olvidar el término doble 2ab</strong><p style="color: var(--texto-medio); margin-top: 0.5rem;">Error: (a + b)&#178; = a&#178; + b&#178; ❌<br>Correcto: (a + b)&#178; = a&#178; + <strong>2ab</strong> + b&#178; ✅</p></div></div><div class="error-item"><span style="font-size: 1.5rem;">❌</span><div><strong>Error de signos en cuadrados de diferencia</strong><p style="color: var(--texto-medio); margin-top: 0.5rem;">Error: (a - b)&#178; = a&#178; - b&#178; ❌<br>Correcto: (a - b)&#178; = a&#178; - 2ab <strong>+ b&#178;</strong> ✅</p></div></div><div class="error-item"><span style="font-size: 1.5rem;">❌</span><div><strong>Confundir suma y diferencia de cubos</strong><p style="color: var(--texto-medio); margin-top: 0.5rem;">El trinomio de la suma tiene signos: +, −, +<br>El trinomio de la diferencia tiene: +, +, +</p></div></div><div class="error-item"><span style="font-size: 1.5rem;">❌</span><div><strong>No revisar multiplicando al final</strong><p style="color: var(--texto-medio); margin-top: 0.5rem;">Siempre verifica tu respuesta multiplicando los factores para asegurarte de que obtienes la expresión original.</p></div></div></div>
-        <div class="kit-heroe"><h3 style="color: var(--amarillo); margin-bottom: 1rem;">🎒 Kit del héroe algebraico</h3><p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto;"><strong>Recuerda:</strong> Los productos notables son tus herramientas. Practica cada fórmula hasta que la reconozcas al instante. Cuando veas un binomio al cuadrado o al cubo, ¡activa tu fórmula correspondiente!</p><p style="margin-top: 1.5rem; font-style: italic; color: var(--amarillo);">"Un verdadero héroe algebraico no memoriza, comprende. ¡Tú puedes!"</p></div>
-    </section>
+ <section id="resumen">
+    <h2 class="section-title">Resumen del héroe</h2>
+
+    <p class="section-subtitle">
+        Todo lo que necesitas recordar en un solo lugar.
+        ¡Tu kit de supervivencia algebraica!
+    </p>
+
+    <table class="resumen-tabla">
+        <thead>
+            <tr>
+                <th>Poder algebraico</th>
+                <th>Fórmula</th>
+                <th>Cómo reconocerlo</th>
+                <th>Alerta del héroe</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <!-- 1. SUMA POR DIFERENCIA -->
+            <tr>
+                <td>
+                    <strong>1. Suma y producto de términos iguales</strong>
+                </td>
+
+                <td>
+                    (A + B)(A − B) = A² − B²
+                </td>
+
+                <td>
+                    Dos binomios con los mismos términos:
+                    uno usa suma y el otro diferencia.
+                </td>
+
+                <td>
+                    Los términos cruzados +AB y −AB se cancelan.
+                </td>
+            </tr>
+
+            <!-- 2. CUADRADO DE UNA SUMA -->
+            <tr>
+                <td>
+                    <strong>2. Cuadrado de una suma</strong>
+                </td>
+
+                <td>
+                    (A + B)² = A² + 2AB + B²
+                </td>
+
+                <td>
+                    Un binomio con signo positivo elevado al cuadrado.
+                </td>
+
+                <td>
+                    Nunca olvides el término central +2AB.
+                </td>
+            </tr>
+
+            <!-- 3. CUADRADO DE UNA DIFERENCIA -->
+            <tr>
+                <td>
+                    <strong>3. Cuadrado de una diferencia</strong>
+                </td>
+
+                <td>
+                    (A − B)² = A² − 2AB + B²
+                </td>
+
+                <td>
+                    Un binomio con signo negativo elevado al cuadrado.
+                </td>
+
+                <td>
+                    El último término B² siempre queda positivo.
+                </td>
+            </tr>
+
+            <!-- 4. CUBO DE UNA SUMA -->
+            <tr>
+                <td>
+                    <strong>4. Cubo de una suma</strong>
+                </td>
+
+                <td>
+                    (A + B)³ = A³ + 3A²B + 3AB² + B³
+                </td>
+
+                <td>
+                    Un binomio con suma elevado al cubo.
+                </td>
+
+                <td>
+                    Son cuatro términos: los coeficientes son 1, 3, 3, 1.
+                </td>
+            </tr>
+
+            <!-- 5. CUBO DE UNA DIFERENCIA -->
+            <tr>
+                <td>
+                    <strong>5. Cubo de una diferencia</strong>
+                </td>
+
+                <td>
+                    (A − B)³ = A³ − 3A²B + 3AB² − B³
+                </td>
+
+                <td>
+                    Un binomio con diferencia elevado al cubo.
+                </td>
+
+                <td>
+                    Los signos alternan: +, −, +, −.
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="errores-lista">
+        <h3 style="color: var(--rojo); margin-bottom: 1.5rem; text-align: center;">
+            ⚠️ Errores frecuentes — ¡Evita estas trampas!
+        </h3>
+
+        <div class="error-item">
+            <span style="font-size: 1.5rem;">❌</span>
+
+            <div>
+                <strong>Olvidar el término doble</strong>
+
+                <p style="color: var(--texto-medio); margin-top: 0.5rem;">
+                    Error:
+                    (A + B)² = A² + B²
+                    ❌
+                    <br>
+
+                    Correcto:
+                    (A + B)² = A² + <strong>2AB</strong> + B²
+                    ✅
+                </p>
+            </div>
+        </div>
+
+        <div class="error-item">
+            <span style="font-size: 1.5rem;">❌</span>
+
+            <div>
+                <strong>Equivocarse con el signo de la diferencia</strong>
+
+                <p style="color: var(--texto-medio); margin-top: 0.5rem;">
+                    Error:
+                    (A − B)² = A² − B²
+                    ❌
+                    <br>
+
+                    Correcto:
+                    (A − B)² = A² − 2AB + B²
+                    ✅
+                </p>
+            </div>
+        </div>
+
+        <div class="error-item">
+            <span style="font-size: 1.5rem;">❌</span>
+
+            <div>
+                <strong>Usar solo dos términos en los cubos</strong>
+
+                <p style="color: var(--texto-medio); margin-top: 0.5rem;">
+                    Error:
+                    (A + B)³ = A³ + B³
+                    ❌
+                    <br>
+
+                    Correcto:
+                    (A + B)³ = A³ + 3A²B + 3AB² + B³
+                    ✅
+                </p>
+            </div>
+        </div>
+
+        <div class="error-item">
+            <span style="font-size: 1.5rem;">❌</span>
+
+            <div>
+                <strong>Olvidar los signos alternados del cubo de una diferencia</strong>
+
+                <p style="color: var(--texto-medio); margin-top: 0.5rem;">
+                    En
+                    (A − B)³,
+                    los signos siguen este orden:
+                    <strong>+, −, +, −</strong>.
+                </p>
+            </div>
+        </div>
+
+        <div class="error-item">
+            <span style="font-size: 1.5rem;">❌</span>
+
+            <div>
+                <strong>No revisar el resultado</strong>
+
+                <p style="color: var(--texto-medio); margin-top: 0.5rem;">
+                    Comprueba cada producto notable desarrollando o multiplicando
+                    término por término. Así confirmas que el poder algebraico fue aplicado
+                    correctamente.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="kit-heroe">
+        <h3 style="color: var(--amarillo); margin-bottom: 1rem;">
+            🎒 Kit del héroe algebraico
+        </h3>
+
+        <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+            <strong>Recuerda:</strong>
+            identifica primero la estructura de la expresión, luego escoge la fórmula
+            correcta, sustituye A y B con cuidado y finalmente verifica tu resultado.
+        </p>
+
+        <p style="margin-top: 1.5rem; font-style: italic; color: var(--amarillo);">
+            "Un verdadero héroe algebraico no memoriza sin comprender:
+            reconoce patrones y activa el poder correcto."
+        </p>
+    </div>
+</section>
 
    <!-- JAVASCRIPT -->
     <script>
